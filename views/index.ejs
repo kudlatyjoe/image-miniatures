@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <title>Miniatures generator</title>
+</head>
+<body>
+
+    <section>
+        <h1>
+            Select an image for resizing:
+        </h1>
+        <form enctype='multipart/form-data' action="/upload" method="post">
+            <input type='file' name='image'>
+            <button type="submit">Submit</button>
+        </form>
+        <% if (error) { %>
+            <h4>
+                <%= error %>
+            </h4>
+        <% } %>
+    </section>
+    
+    <section>
+        <% if (images.length > 0) { %>
+            <h1>
+                Click a thumbnail to download the desired image:
+            </h1>
+            <div class="images-container">
+            <% images.forEach(image => { %>
+                <div class="image-wrapper">
+                    <img src="<%= image.thumb %>" alt="Image...">
+                    <a class="overlay" href="<%= image.path %>" download>
+                        <%= image.width %>px       
+                    </a>
+                </div>
+            <% }) %>
+            </div>
+        <% } %>
+    </section>
+    
+</body>
+</html>
